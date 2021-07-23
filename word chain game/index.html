@@ -12,7 +12,7 @@
     <div>제시어:<span id="word"><p></p></span></div>
     <input name="word" type="text">
     <button>입력</button>
-    <div>결과 표시:<span id="result"><p></p></span></div>
+    <div><span id="result"><p></p></span></div>
 
     <script>
         let word; //제시어
@@ -23,21 +23,21 @@
         const $result = document.querySelector('#result');
 
         const onClickButton = () => {
-            if(!word){ //제시어가 비어 있는가?
-                //비어 있다.
+            if(!word){ //제시어가 비어있다.
                 word = newWord;
                 $word.textContent = word;
-                $result.textContent = word;
+                $result.textContent = "결과 : " + word;
                 $input.value = '';
-            }else{ //올바른 단어
+            }else{ //비어있지 않다.
                 if(word[word.length - 1] == newWord[0]){
                     word = newWord;
                     $word.textContent = newWord;
                     $result.textContent += ' > ' + newWord;
                 }else{
                     alert('올바르지 않은 단어입니다.')
+                    $input.value = '';
+                    $input.focus();
                 }
-                //비어있지 않다.
             }
         };
         const onInput = (event) => {
