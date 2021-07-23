@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Chain Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>끝말잇기 게임</h1>
+    <div>제시어:<span id="word"><p></p></span></div>
+    <input name="word" type="text">
+    <button>입력</button>
+    <div>결과 표시:<span id="result"><p></p></span></div>
+
+    <script>
+        let word; //제시어
+        let newWord; //새로 입력한 단어
+        const $button = document.querySelector('button');
+        const $input = document.querySelector('input');
+        const $word = document.querySelector('#word');
+        const $result = document.querySelector('#result');
+
+        const onClickButton = () => {
+            if(!word){ //제시어가 비어 있는가?
+                //비어 있다.
+                word = newWord;
+                $word.textContent = word;
+                $result.textContent = word;
+                $input.value = '';
+            }else{ //올바른 단어
+                if(word[word.length - 1] == newWord[0]){
+                    word = newWord;
+                    $word.textContent = newWord;
+                    $result.textContent += ' > ' + newWord;
+                }else{
+                    alert('올바르지 않은 단어입니다.')
+                }
+                //비어있지 않다.
+            }
+        };
+        const onInput = (event) => {
+            newWord = event.target.value;
+        };
+
+        $input.addEventListener('input', onInput);
+        $button.addEventListener('click', onClickButton);
+    </script>
+</body>
+</html>
