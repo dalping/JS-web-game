@@ -4,9 +4,106 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Number Baseball</title>
 </head>
 <body>
 
+    <title>Number Baseball Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game">
+        <h1>숫자 야구 게임</h1>
+        <div id="balls">
+            <div class="ball"><span></span></div>
+            <div class="ball"><span></span></div>
+            <div class="ball"><span></span></div>
+            <div class="ball"><span></span></div>
+        </div>
+        <div><span id="homerun"></span></div>
+        <input id="input"/>
+        <button id="btn">입력</button>
+        <button id="reset">다시하기</button>
+        <div id="result">숫자를 입력해주세요.</div>
+    </div>
+    <script>
+        let strike = 0;
+        let ball = 0;
+        let newNumber;
+        let numbers = [];
+
+         //4자리 숫자 생성
+        const random_number = () => {
+            while(numbers.length != 4){ 
+            let flag = false;
+            let num = Math.floor(Math.random() * 10);
+            for(let i=0 ; i<numbers.length ; i+=1){
+                if(num == numbers[i]){
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag != true){numbers.push(num);}
+            }
+        }
+        random_number();
+ 
+        $homerun = document.querySelector("#homerun");
+        $result = document.querySelector("#result");
+        $input = document.querySelector("#input");
+        $button = document.querySelector("#btn");
+        $reset = document.querySelector("#reset");
+        $$balls = document.querySelectorAll(".ball");
+
+        const onInput = (e) => {
+            newNumber = e.target.value;
+        }
+        
+        const onClickButton = () => {
+            if(!Number(newNumber) || newNumber.length != 4){
+                alert("4자리 숫자를 입력하세요.");
+                $input.value='';
+                $input.focus();
+                return;
+            }else{ 
+                console.log(numbers);
+                for(let i=0;i<4;i++){
+                    if (newNumber[i] == numbers[i]){
+                        strike += 1;
+                        $$balls[i].textContent = newNumber[i];
+                    }else{
+                        for(let j=0;j<4;j++){
+                            if(newNumber[i] == numbers[j]){
+                                ball += 1;
+                            }
+                        }
+                    }
+                }
+                $result.textContent += newNumber + ' ' + strike + 's '+ ball + 'b' + '\n';
+                if(strike == 4){
+                    $homerun.textContent = "HomeRun!";
+                }
+                strike = 0;
+                ball = 0;
+            }  
+        }
+
+        const onClickResetButton = () =>{ 
+            $result.textContent = "숫자를 입력해주세요.";
+            $input.value='';
+            $input.focus();
+            numbers = [];
+            $homerun.textContent = '';
+            random_number();
+            for(let i=0;i<4;i++){
+                    $$balls[i].textContent = '';
+            }
+        }
+
+        $input.addEventListener('input',onInput);
+        $button.addEventListener('click',onClickButton);
+        $reset.addEventListener('click',onClickResetButton);
+
+    </script>
 </body>
 </html>
