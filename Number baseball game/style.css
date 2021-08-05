@@ -1,0 +1,38 @@
+
+
+#balls{
+    width: 50vh;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.ball{
+    width:50px;
+    height:50px;
+    background-color:salmon;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+}
+
+.ball:nth-child(1){
+    background-color: red;
+}
+
+.ball:nth-child(2){
+    background-color: orange;
+}
+
+.ball:nth-child(3){
+    background-color: yellow;
+}
+
+.ball:nth-child(4){
+    background-color: greenyellow;
+}
