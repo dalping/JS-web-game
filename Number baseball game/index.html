@@ -24,7 +24,7 @@
         <input id="input"/>
         <button id="btn">입력</button>
         <button id="reset">다시하기</button>
-        <div id="result">숫자를 입력해주세요.</div>
+        <div id="result">숫자를 입력해주세요.<br></div>
     </div>
     <script>
         let strike = 0;
@@ -79,7 +79,7 @@
                         }
                     }
                 }
-                $result.textContent += newNumber + ' ' + strike + 's '+ ball + 'b' + '\n';
+                $result.innerHTML += newNumber + ' ' + strike + 's '+ ball + 'b <br>';
                 if(strike == 4){
                     $homerun.textContent = "HomeRun!";
                 }
@@ -89,7 +89,7 @@
         }
 
         const onClickResetButton = () =>{ 
-            $result.textContent = "숫자를 입력해주세요.";
+            $result.innerHTML = "숫자를 입력해주세요. <br>";
             $input.value='';
             $input.focus();
             numbers = [];
