@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock-paper-scissors</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <h1>가위바위보 게임</h1>
+    </div>
+    <div id="ai">
+      <img name="img" src="image/moving.gif" />
+    </div>
+    <div>
+      <span id="result"></span>
+    </div>
+    <div>
+      <input type="button" class="rock ball" value="rock" />
+      <input type="button" class="paper ball" value="paper" />
+      <input type="button" class="scissor ball" value="scissor" />
+    </div>
+    <div class="score">
+      win: <span class="win">0</span> lose:<span class="lose">0</span>
+    </div>
+    <script>
+      $rock = document.querySelector(".rock");
+      $paper = document.querySelector(".paper");
+      $scissor = document.querySelector(".scissor");
+      $result = document.querySelector("#result");
+      $img = document.querySelector("#img");
+      $win = document.querySelector(".win");
+      $lose = document.querySelector(".lose");
+
+      let win = 0;
+      let lose = 0;
+      let flag = false;
+
+      const onClickButton = (e) => {
+        if (flag === true) return;
+        flag = true;
+        const me = e.target.value;
+        let res = Math.floor(Math.random() * 3);
+        let my_res = e.target.value;
+
+        setTimeout(function () {
+          img.setAttribute("src", "image/moving.gif");
+          flag = false;
+        }, 1500);
+
+        if (my_res === "rock") {
+          if (res == 0) {
+            img.setAttribute("src", "image/rock.png");
+            $result.textContent = "무승부";
+          } else if (res == 1) {
+            img.setAttribute("src", "image/paper.png");
+            $result.textContent = "패배...";
+            lose += 1;
+          } else if (res == 2) {
+            img.setAttribute("src", "image/scissor.png");
+            $result.textContent = "승리!";
+            win += 1;
+          }
+        } else if (my_res === "paper") {
+          if (res == 0) {
+            img.setAttribute("src", "image/rock.png");
+            $result.textContent = "승리!";
+            win += 1;
+          } else if (res == 1) {
+            img.setAttribute("src", "image/paper.png");
+            $result.textContent = "무승부";
+          } else if (res == 2) {
+            img.setAttribute("src", "image/scissor.png");
+            $result.textContent = "패배...";
+            lose += 1;
+          }
+        } else {
+          if (res == 0) {
+            img.setAttribute("src", "image/rock.png");
+            $result.textContent = "패배...";
+            lose += 1;
+          } else if (res == 1) {
+            img.setAttribute("src", "image/paper.png");
+            $result.textContent = "승리!";
+            win += 1;
+          } else if (res == 2) {
+            img.setAttribute("src", "image/scissor.png");
+            $result.textContent = "무승부";
+          }
+        }
+
+        console.log(lose, win);
+        $win.textContent = `${win}`;
+        $lose.textContent = `${lose}`;
+      };
+
+      $rock.addEventListener("click", onClickButton);
+      $paper.addEventListener("click", onClickButton);
+      $scissor.addEventListener("click", onClickButton);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotto Number Creator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="result">추첨 결과 :</div>
+    <div id="bonus">BONUS :</div>
+    <script>
+      //피셔 예이츠
+      const candidate = Array(45)
+        .fill()
+        .map((v, i) => i + 1);
+      const shuffle = [];
+      while (candidate.length > 0) {
+        const random = Math.floor(Math.random() * candidate.length);
+        const spliceArray = candidate.splice(random, 1);
+        const value = spliceArray[0];
+        shuffle.push(value);
+      }
+
+      const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
+      const bonus = shuffle[6];
+
+      const $result = document.querySelector("#result");
+
+      function colorize(number, $tag) {
+        if (number < 10) {
+          $tag.style.backgroundColor = "red";
+          $tag.style.color = "white";
+        } else if (number < 20) {
+          $tag.style.backgroundColor = "orange";
+        } else if (number < 30) {
+          $tag.style.backgroundColor = "yellow";
+        } else if (number < 40) {
+          $tag.style.backgroundColor = "blue";
+          $tag.style.color = "white";
+        } else {
+          $tag.style.backgroundColor = "green";
+          $tag.style.color = "white";
+        }
+      }
+
+      const drawBall = (number, $parent) => {
+        const $ball = document.createElement("div");
+        $ball.className = "ball";
+        colorize(number, $ball);
+        $ball.textContent = number;
+        $parent.appendChild($ball);
+      };
+
+      for (let i = 0; i < winBalls.length; i++) {
+        setTimeout(() => {
+          drawBall(winBalls[i], $result);
+        }, (i + 1) * 1000);
+      }
+
+      const $bonus = document.querySelector("#bonus");
+      setTimeout(() => {
+        drawBall(bonus, $bonus);
+      }, 7000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div></div>
+    <script>
+  
+      const { body } = document;
+      //createElemnet는 구조분해 할당하면 안돌아감 ㅠ
+      let turn = "O";
+      const rows = [];
+      const $table = document.createElement("result");
+      const $result = document.createElement("div");
+
+      const callback = (e) => {
+        //주의: scope에 따라 변수 분리되는 것 생각하기 ex)$td,$tr
+        if (e.target.textContent !== ''){ // 빈칸이 아님
+          return;
+        } else { //빈칸이면 표시 후 턴넘기기
+            e.target.textContent = turn;
+            //승자 판별
+            if(checkWinner(event.target)){
+              $result.textContent = `${turn}님이 승리!`;
+              $table.removeEventListener('click',callback); 
+            }
+            //무승부 판별
+
+            if(checkDraw() === true){
+              $result.textContent = "무승부 입니다.";
+            }
+
+            turn = (turn === 'X' ? 'O' : 'X'); 
+        }
+      };
+
+      const checkDraw = () => {
+        let isDraw = true;
+
+        rows.forEach((row) => {
+          row.forEach((cell) => {
+            if(!cell.textContent){
+              isDraw = false;
+            }
+          });
+        });
+        return isDraw;
+      }
+
+
+      const checkWinner = (target) => {
+        let rowIndex;
+        let cellIndex;
+        //내가 클릭한 td 찾아내기
+        rows.forEach((row,ri) => {
+          row.forEach((cell, ci) => {
+            if(cell === target){
+              rowIndex = ri;
+              cellIndex = ci;
+            }
+          });
+        });
+        //세칸 다 채워졌나? //승자가 있는가
+        let hasWinner = false;
+        //가로줄 검사
+        if(
+          rows[rowIndex][0].textContent === turn &&
+          rows[rowIndex][1].textContent === turn &&
+          rows[rowIndex][2].textContent === turn
+        ){
+          hasWinner = true;
+        }
+        //세로줄 검사
+        if(
+          rows[0][cellIndex].textContent === turn &&
+          rows[1][cellIndex].textContent === turn &&
+          rows[2][cellIndex].textContent === turn
+        ){
+          hasWinner = true;
+        }
+        //대각선 검사 왼쪽 -> 오른쪽
+        if(
+          rows[0][0].textContent === turn &&
+          rows[1][1].textContent === turn &&
+          rows[2][2].textContent === turn
+        ){
+          hasWinner = true;
+        }
+        //대각선 검사 오른쪽 -> 왼쪽
+        if(
+          rows[0][2].textContent === turn &&
+          rows[1][1].textContent === turn &&
+          rows[2][0].textContent === turn
+        ){
+          hasWinner = true;
+        }
+
+        return hasWinner;
+      }
+
+      for (let i = 0; i < 3; i++) { //행
+        const $tr = document.createElement("tr");
+        const cells = [];
+        for (let j = 0; j < 3; j++) { //열
+          const $td = document.createElement("td"); //변수로 빼놓아야 나중에 재사용이 쉬워짐
+          cells.push($td);
+          $tr.append($td);
+        }
+        $table.append($tr);
+        rows.push(cells);
+      }
+      $table.addEventListener('click',callback);
+      document.body.append($table);
+      document.body.append($result);
+      console.log(rows);
+    </script>
+  </body>
+</html>
