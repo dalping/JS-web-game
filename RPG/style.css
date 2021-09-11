@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "DOSGothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "DOSGothic";
+}
+
+.start-btn {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  font-size: 1.5em;
+  border: 1px solid white;
+  border-radius: 20px;
+  background-color: #88fff7;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1.5em;
+}
+
+.box {
+  width: 800px;
+  height: 400px;
+  background-color: #7c83fd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid black;
+  width: 798px;
+  height: 100px;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box h1 {
+  text-align: center;
+}
+
+.game-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  font-size: 1.5em;
+  padding: 40px 320px;
+  border: 1px solid white;
+  cursor: pointer;
+  background-color: #96baff;
+}
+
+.menu:hover {
+  background-color: #7dedff;
+}
+
+.rest-screen{
+  color:white;
+}
+
+.stat-screen {
+  margin-top: 20px;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}j

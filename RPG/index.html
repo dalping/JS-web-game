@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Text RPG</title>
+  </head>
+  <body>
+    <div class="screen">
+      <h1>RPG</h1>
+
+      <div class="box">
+        <form class="start-screen">
+          <label>주인공의 이름을 입력하세요.</label>
+          &nbsp;
+          <input id="name-input" />
+          &nbsp;
+          <button class="start-btn">start</button>
+        </form>
+
+        <div class="menu-screen game-menu" style="display: none">
+          <div class="menu advan">모험</div>
+          <div class="menu rest">휴식</div>
+          <div class="menu exit">종료</div>
+        </div>
+
+        <div class="battle-screen game-menu" style="display: none">
+          <div class="menu attack">공격</div>
+          <div class="menu recover">회복</div>
+          <div class="menu escape">도망</div>
+        </div>
+
+        
+        <div class="rest-screen game-menu" style="display: none">
+          <label>휴식 중...</label>
+        </div>
+
+        <div class="exit-screen game-menu" style="display: none">
+          <label>Game Over</label>
+        </div>
+
+      </div>
+
+      <div class="message-screen">
+        <div class="message"></div>
+      </div>
+
+      <div class="stat-screen">
+            <div class="stat hero-stat">
+                <span id="hero-name"></span>
+                &nbsp;
+                <span id="hero-level"></span>
+                <span id="hero-hp"></span>
+                <span id="hero-xp"></span>
+                <span id="hero-att"></span>
+            </div>
+
+            <!-- <div class="message"></div> -->
+
+            <div class="stat monster-stat">
+                <span id="monster-name"></span>
+                &nbsp;
+                <span id="monster-hp"></span>
+                <span id="monster-att"></span>
+            </div>
+        </div>
+      </div>
+      <!-- style="display: none" -->
+    </div>
+    <script src="./script-class.js"></script>
+  </body>
+</html>
