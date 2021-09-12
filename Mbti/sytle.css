@@ -1,0 +1,77 @@
+* {
+  padding: 0px;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* css초기화 */
+
+body {
+  background-color: #ffc996;
+  font-family: "BMJUA";
+}
+
+.navbar {
+  background-color: #583d72;
+  height: 8vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar label {
+  font-size: 1.5em;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 80vh;
+}
+
+.question {
+  margin: 5% auto;
+  text-align: center;
+}
+
+#Q {
+  font-size: 1.5em;
+  margin: 30px auto;
+}
+
+.A {
+  background-color: #ff8474;
+  border-radius: 20px;
+  font-size: 1.3em;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.test {
+  width: 500px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gagebar {
+  margin: 5px auto;
+  background-color: tomato;
+}
+
+@font-face {
+  font-family: "BMJUA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
