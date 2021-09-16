@@ -3,12 +3,18 @@ let arr = []
 const card_val = []
 var pick_card = '-1';
 let result = 0;
-let colors = []
 
 const $btn = document.querySelector('.btn');
 const $cards = document.querySelectorAll(".card")
+const $board = document.querySelector(".board");
+
+colors = ["red","orange","yellow","green","blue","pink","pupple"]
+let colorCopy = colors.concat(colors);
+let shuffled = [];
+const total = 16;
 
 const onCardHandler = (e) => {
+
     if(pick_card !== '-1'){
     
         if(e.target === pick_card) return //자기 자신을 선택할 시 스킵
@@ -42,32 +48,41 @@ const onCardClear = (card) => {
 
 $btn.addEventListener("click",(e)=>{
 
-    startGame()
+    startGame();
 
-    for(let i=0; i<16; i++){
-        $cards[i].style.backgroundColor = "pink";
-     }
-
-    setTimeout(()=>{
-        for(let i=0; i<16; i++){
-           $cards[i].style.backgroundColor = "black";
-           $cards[i].addEventListener("click", onCardHandler);
-        }
-    },3000);
 })
 
-const startGame = () =>{
-    for(let i=0 ; i<2 ; i++){
-        arr = [0,1,2,3,4,5,6,7]
-        color = ["red","orange","yellow","green","blue","pink","pupple"]
-        for(let j=0 ; j<8 ; j++){
-            let random = [Math.floor(Math.random() * arr.length - 1)]
-            let val = arr.splice(random,1)
-            card_val.push(val)
-            $cards[j+(i*8)].textContent = `${val}`
-        }
+const shuffle = () =>{ //피셔-예이츠 셔플
+ 
+    for(let i=0 ; colorCopy.length > 0 ; i++){ 
+        let random = Math.floor(Math.random() * colorCopy.length)
+        shuffled = shuffled.concat(colorCopy.splice(random,1))
     }
 }
+
+const createCard = (i) =>{ // div.card > div.card-inner > ( div.card-front + div.card-back )
+    const card = document.createElement('div');
+    card.className = 'card';
+    const cardInner = document.createElement('div');
+    cardInner.className = 'card-inner';
+    const cardFront = document.createElement('div');
+    cardFront.className = 'card-front';
+    const cardBack = document.createElement('div');
+    cardBack.className = 'card-back';
+    cardBack.style.backgroundColor = shuffled[i];
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+    return card;
+}
+
+const startGame = () =>{
+        shuffle();
+        for (let i=0 ; i < total; i++){
+            const card = createCard(i);
+            $board.appendChild(card);
+        }
+    }
 
 // for(let i=0; i<16; i++){
 //     $cards[i].textContent = `${card_val[i]}`
