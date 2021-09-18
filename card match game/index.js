@@ -1,29 +1,25 @@
 
-let arr = []
-const card_val = []
-var pick_card = '-1';
-let result = 0;
 let clicked = [];
 let completed = [];
 let shuffled = [];
 const total = 16;
 let clickable = true;
+let startTime = 0;
 
 const $btn = document.querySelector('.btn');
 const $cards = document.querySelectorAll(".card")
 const $board = document.querySelector(".board");
 
-colors = ["red","orange","yellow","green","blue","pink","violet"]
+colors = ["red","orange","yellow","green","blue","pink","violet","white"]
 let colorCopy = colors.concat(colors);
 
 $btn.addEventListener("click",(e)=>{
     startGame();
 })
 
-const shuffle = () =>{ //피셔-예이츠 셔플
- 
+const shuffle = () =>{ //피셔-예이츠 셔플 
     for(let i=0 ; colorCopy.length > 0 ; i++){ 
-        let random = Math.floor(Math.random() * colorCopy.length)
+    let random = Math.floor(Math.random() * colorCopy.length)
         shuffled = shuffled.concat(colorCopy.splice(random,1))
     }    
 }    
@@ -51,14 +47,17 @@ function onClickCard(){
         return;
     }
     this.classList.toggle('flipped');
-    clicked.push(this);  //여기서 this는 event를 가리킴
-    if (clicked.length !== 2){ //아직 카드를 두 장 선택하지 않음
-        return;
+    
+    clicked.push(this);
+    if (clicked.length !== 2) {
+      return;
     }
+    
     const firstBackColor = clicked[0].querySelector('.card-back').style.backgroundColor;
     const secondBackColor = clicked[1].querySelector('.card-back').style.backgroundColor;
     
     if ( firstBackColor === secondBackColor ){ //선택한 카드가 동일
+
         completed.push(clicked[0]);
         completed.push(clicked[1]);
         clicked = [];
@@ -66,16 +65,19 @@ function onClickCard(){
         if (completed.length !== total){
             return;
         }
+        const endTime = new Date();
         setTimeout(() => {
-            alert("축하합니다!"); 
+            alert(`축하합니다! ${Math.round((endTime - startTime)/1000)}초 걸렸습니다.`); 
             resetGame();
         },1000);
         return; 
     }
+    clickable = false;
     setTimeout(() => { //선택한 카드가 다름 : 카드 초기화
         clicked[0].classList.remove('flipped');
         clicked[1].classList.remove('flipped');
         clicked = [];
+        clickable = true;
     },500);
 }
 
@@ -107,6 +109,7 @@ const startGame = () =>{
                 card.classList.remove('flipped');
             });
             clickable = true;
+            startTime = new Date();
         },5000);
     }
         
